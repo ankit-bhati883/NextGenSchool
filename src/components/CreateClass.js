@@ -36,9 +36,11 @@ import {
         //   creatorPhoto: user.photoURL,
         //   posts: [],
         // });
-
+        // const q=query(collection(db,"users"),where("uid","==",user.uid))
         // add to current user's class list
-        const userRef = await getDocs(collection(db,"users"),where("uid","==",user.uid))
+        const q=query(collection(db,"users"),where("uid","==",user.uid))
+        const userRef=await getDocs(q);
+        console.log(userRef)
         // const userRef = await db
         //   .collection("users")
         //   .where("uid", "==", user.uid)
@@ -48,7 +50,9 @@ import {
         // const userData = userRef.data();
         // console.log("userData",userData)
         const docId = userRef.docs[0].id;
+        console.log("docId",docId)
         const userData = userRef.docs[0].data();
+        console.log("userData",userData)
         let userClasses = userData.enrolledClassrooms;
         userClasses.push({
           id: newClass.id,

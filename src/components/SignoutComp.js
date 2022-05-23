@@ -13,7 +13,9 @@ import {
   import { auth, logout } from "../firebase";
   import { collection, query, where, getDocs ,addDoc, updateDoc, doc,getDoc, DocumentSnapshot } from "firebase/firestore"; 
   import { signoutAtom } from "../utils/atom";
+  import { useNavigate } from 'react-router-dom';
   function SignoutComp() {
+    const navigate = useNavigate();
     const [open, setOpen] = useRecoilState(signoutAtom);
     const [user, loading, error] = useAuthState(auth);
     // const [classId, setClassId] = useState("");
@@ -23,6 +25,7 @@ import {
     const handlelogout=()=>{
         logout()
         handleClose()
+        // navigate(`/`);
     }
     // const joinClass = async () => {
     //   try {

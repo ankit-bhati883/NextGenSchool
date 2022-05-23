@@ -170,10 +170,10 @@ function Class() {
     //     console.log(data);
     //     setClassData(data);
     //   });
-  }, []);
+  }, [id]);
   useEffect(() => {
     if (loading) return;
-    if (!user) navigate(-1);
+    if (!user) navigate('/');
   }, [loading, user]);
   return (
     <div className="class">

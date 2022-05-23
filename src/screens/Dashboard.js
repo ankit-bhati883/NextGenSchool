@@ -34,7 +34,7 @@ const navigate = useNavigate();
   };
   useEffect(() => {
     if (loading) return;
-    if (!user) navigate(-1);
+    if (!user) navigate('/');
   }, [user, loading]);
   useEffect(() => {
     if (loading) return;

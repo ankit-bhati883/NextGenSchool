@@ -15,7 +15,7 @@ function Home() {
 
     useEffect(() => {
         if (loading) return;
-        if (!user) navigate(-1);
+        // if (!user) navigate(-1);
         if (user) navigate('/dashboard');
     }, [loading, user]);
   return (
