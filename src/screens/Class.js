@@ -93,6 +93,9 @@ function Class() {
     let reversedArray = classData?.posts?.reverse();
     setPosts(reversedArray);
   }, [classData]);
+
+
+
   const createPost = async (url) => {
     try {
       const myClassRef =  await getDoc(doc(db,"classes",id))
@@ -106,14 +109,23 @@ function Class() {
       const myClassData = await myClassRef.data();
       console.log(myClassData);
       let tempPosts = myClassData.posts;
-      tempPosts.push({
+      
+      const newPost=await addDoc(collection(db,"posts"),{
         authorId: user.uid,
         content: announcementContent,
         date: moment().format("MMM Do YY"),
         image: user.photoURL,
         name: user.displayName,
         img: url,
-        Comments:[],
+        comments:[],
+      }); 
+
+      
+
+      tempPosts.push({
+        id: newPost.id,
+        authorId: user.uid,
+        date: moment().format("MMM Do YY"),
       });
       const docRef=await updateDoc( doc(db,"classes",id),{
         posts: tempPosts,
@@ -193,12 +205,7 @@ function Class() {
       </div>
       {posts?.map((post) => (
         <Announcement
-          authorId={post.authorId}
-          content={post.content}
-          date={post.date}
-          image={post.image}
-          name={post.name}
-          img={post.img}
+          id={post.id}
         />
       ))}
     </div>

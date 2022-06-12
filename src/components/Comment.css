@@ -1,0 +1,50 @@
+
+  
+  
+    
+   .comment__informationContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .comment__infoSection {
+      display: flex;
+      align-items: center;
+    }
+    .comment_nameDateContent{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+    .comment__nameAndDate {
+      display: flex;  
+      
+    }
+    .comment__name {
+      font-weight: 450;
+    }
+    .comment__date {
+      color: #424242;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+    
+    .comment__imageContainer > img {
+      height: 50px;
+      width: 50px;
+      
+      border-radius: 9999px;
+    }
+   .comment__content {
+      margin-top: 4px;
+      font-weight:400;
+    }
+    
+   
+  
+    @media(max-width:499px){
+      .comment{
+        padding: 5px;
+      }
+      
+    }

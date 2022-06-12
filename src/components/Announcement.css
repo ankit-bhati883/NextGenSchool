@@ -5,24 +5,11 @@
   margin-bottom: 20px;
   padding: 30px;
 }
-.announcement {
-  padding: 30px;
-  }
-  /* .inputcomment{
-    width: 70%;
-  } */
-
-
-  .Add_comments {
+ .Add_comments {
     display: flex;
     align-items: center;
-    /* width: 100%; */
-    padding: 30px;
-    /* margin-bottom: px; */
-    /* box-shadow: 0px 1px 6px -2px black; */
     justify-content: space-between;
-    /* border-radius: 15px; */
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .Add_comments > img {
     height: 50px;
@@ -68,16 +55,9 @@
   }
   .announcement__content {
     margin-top: 15px;
+    margin-left: 60px;
+    font-size: 18sp;
   }
-  /* .Add_comments{
-    display: flex;
-    border: 1px solid #adadad;
-    padding: 2%;
-    border-radius: 10px;
-  } */
-  /* .comment_input{
-    width: 100%;
-  } */
   .imgcont{
     display: flex;
     justify-content: center;
@@ -90,7 +70,7 @@
   }
 
   @media(max-width:499px){
-    .announcement{
+    .announcement_box{
       padding: 5px;
     }
     .amt__img {
@@ -100,6 +80,7 @@
     }
     .Add_comments {
       padding: 5px;
+      margin-top: 5px;
     }
     .Add_comments > input {
       padding: 1px 1px;
