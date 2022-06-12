@@ -5,7 +5,14 @@ import 'firebase/compat/firestore';
 
 import { collection, query, where, getDocs ,addDoc } from "firebase/firestore"; 
 
-//Api
+const firebaseConfig = {
+    apiKey: "api",
+    authDomain: "nextgenschool-871e4.firebaseapp.com",
+    projectId: "nextgenschool-871e4",
+    storageBucket: "nextgenschool-871e4.appspot.com",
+    messagingSenderId: "739795588657",
+    appId: "1:739795588657:web:a58ec04a1a15eb87cfe710"
+  };
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
