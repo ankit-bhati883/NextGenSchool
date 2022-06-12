@@ -8,6 +8,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import Announcement from "../components/Announcement";
 import { auth, db } from "../firebase";
+import L1 from '../assets/L1.jpg'
+import L2 from '../assets/L4.jpg'
+import L3 from '../assets/L3.jpg'
+import L4 from '../assets/L2.jpg'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import { collection, query, where, getDocs ,addDoc, updateDoc, doc,getDoc, DocumentSnapshot ,onSnapshot} from "firebase/firestore"; 
@@ -19,7 +23,8 @@ function Class() {
   const [user, loading, error] = useAuthState(auth);
   const [showInput, setShowInput] = useState(false);
   const [image, setImage] = useState(null);
-  
+  const mypic=[L1,L2,L3,L4];
+  const randomImage = mypic[Math.floor(Math.random() * mypic.length)];
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -32,12 +37,8 @@ function Class() {
   };
   const handleUpload = () => {
 
-    
-    
-    // Create the file metadata
-    
-    
     // Upload file and metadata to the object 'images/mountains.jpg'
+    if(image){
     const storageRef = ref(storage, 'images/' + image.name);
     const uploadTask = uploadBytesResumable(storageRef, image, metadata);
     
@@ -58,8 +59,6 @@ function Class() {
       }, 
       (error) => {
         setShowInput(false)
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
         switch (error.code) {
           case 'storage/unauthorized':
             // User doesn't have permission to access the object
@@ -83,35 +82,12 @@ function Class() {
         });
       }
     );
+    }else createPost('')
 
-
-
-    // const uploadImage = storage.ref(`images/${image.name}`).put(image);
-
-    // uploadImage.on("state_changed", () => {
-    //   storage
-    //     .ref("images")
-    //     .child(image.name)
-    //     .getDownloadURL()
-    //     .then((url) => {
-    //       createPost(url)
-    //       // db.collection("announcments")
-    //       //   .doc("classes")
-    //       //   .collection(classData.id)
-    //       //   .add({
-    //       //     timstamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //       //     imageUrl: url,
-    //       //     text: inputValue,
-    //       //     sender: loggedInMail,
-    //       //   });
-    //     });
-    // });
   };
   const { id } = useParams();
-  // window.location.reload() 
   console.log("class",id)
-//   const history = useHistory();
-    const navigate=useNavigate()
+    const navigate=useNavigate();
   useEffect(() => {
     // reverse the array
     let reversedArray = classData?.posts?.reverse();
@@ -121,8 +97,6 @@ function Class() {
     try {
       const myClassRef =  await getDoc(doc(db,"classes",id))
       console.log(id)
-    //   const myClassRef = await db.collection("classes").doc(id).get();
-    // const myClassData =await myClassRef.data
     if (!myClassRef.exists) {
         return alert(`Class doesn't exist, please provide correct ID`);
       }
@@ -139,15 +113,13 @@ function Class() {
         image: user.photoURL,
         name: user.displayName,
         img: url,
+        Comments:[],
       });
       const docRef=await updateDoc( doc(db,"classes",id),{
         posts: tempPosts,
     })
     setAnnouncementContent("")
     setShowInput(false)
-    //   myClassRef.ref.update({
-    //     posts: tempPosts,
-    //   });
     } catch (error) {
       setShowInput(false)
       console.error(error);
@@ -162,14 +134,6 @@ function Class() {
         console.log(data);
         setClassData(data);
       });
-    // db.collection("classes")
-    //   .doc(id)
-    //   .onSnapshot((snapshot) => {
-    //     const data = snapshot.data();
-    //     if (!data) history.replace("/");
-    //     console.log(data);
-    //     setClassData(data);
-    //   });
   }, [id]);
   useEffect(() => {
     if (loading) return;
@@ -178,7 +142,9 @@ function Class() {
   return (
     <div className="class">
       <div className="class__nameBox">
+        <img src={randomImage} className="nameboximage"/>
         <div className="class__name">{classData?.name}</div>
+        {classData?.creatorUid==user?.uid&&<div className="class_id">Classid- {id}</div> }
       </div>
       <div className="class__announce">
       {showInput ? (
@@ -190,8 +156,6 @@ function Class() {
                       variant="filled"
                       value={announcementContent}
                       onChange={(e) => setAnnouncementContent(e.target.value)}
-                      // value={inputValue}
-                      // onChange={(e) => setInput(e.target.value)}
                     />
                     <div className="main__buttons">
                       <input
@@ -217,22 +181,15 @@ function Class() {
                     className="main__wrapper100"
                     onClick={() => setShowInput(true)}
                   >
+                    <div className="announcement__imageContainer">
                     <img src={user?.photoURL} alt="My image" />
+                    </div>
                     <div>Announce Something to class</div>
                   </div>
                 )}
 
 
         
-        {/* <input
-          type="text"
-          value={announcementContent}
-          onChange={(e) => setAnnouncementContent(e.target.value)}
-          placeholder="Announce something to your class"
-        />
-        <IconButton onClick={createPost}>
-          <SendOutlined />
-        </IconButton> */}
       </div>
       {posts?.map((post) => (
         <Announcement
