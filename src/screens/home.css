@@ -14,7 +14,7 @@
   }
   .home__login {
     margin-top: 30px;
-    padding: 20px;
+    padding: 10px;
     background-color: #2980b9;
     font-size: 18px;
     color: white;
@@ -22,3 +22,13 @@
     text-transform: uppercase;
     border-radius: 10px;
   }
+
+  
+
+
+@media(max-width:499px){
+  .home__image{
+    width: 40vh;
+    height: 60vw;
+  }
+}

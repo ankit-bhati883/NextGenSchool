@@ -17,7 +17,10 @@ import {
     const [user, loading, error] = useAuthState(auth);
     const [open, setOpen] = useRecoilState(createDialogAtom);
     const [className, setClassName] = useState("");
+    const [success,setSuccess]=useState(false);
+    const [classid,setClassid]=useState("");
     const handleClose = () => {
+      setSuccess(false);
       setOpen(false);
     };
     const createClass = async () => {
@@ -29,26 +32,10 @@ import {
             creatorPhoto: user.photoURL,
             posts: [],
           });  
-        // const newClass = await db.collection("classes").add({
-        //   creatorUid: user.uid,
-        //   name: className,
-        //   creatorName: user.displayName,
-        //   creatorPhoto: user.photoURL,
-        //   posts: [],
-        // });
-        // const q=query(collection(db,"users"),where("uid","==",user.uid))
         // add to current user's class list
         const q=query(collection(db,"users"),where("uid","==",user.uid))
         const userRef=await getDocs(q);
         console.log(userRef)
-        // const userRef = await db
-        //   .collection("users")
-        //   .where("uid", "==", user.uid)
-        //   .get();
-        // const docId = userRef.id;
-        // console.log("docId",docId)
-        // const userData = userRef.data();
-        // console.log("userData",userData)
         const docId = userRef.docs[0].id;
         console.log("docId",docId)
         const userData = userRef.docs[0].data();
@@ -59,17 +46,15 @@ import {
           name: className,
           creatorName: user.displayName,
           creatorPhoto: user.photoURL,
+          creatorUid: user.uid,
         });
 
         const docRef=await updateDoc( doc(db,"users",docId),{
             enrolledClassrooms: userClasses,
         })
-        // const docRef = await db.collection("users").doc(docId);
-        // await docRef.update({
-        //   enrolledClassrooms: userClasses,
-        // });
-        handleClose();
-        alert("Classroom created successfully!");
+        setSuccess(true);
+        setClassid(newClass.id);
+        console.log('success-',success);
       } catch (err) {
         alert(`Cannot create class - ${err.message}`);
       }
@@ -81,12 +66,12 @@ import {
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create class</DialogTitle>
+          <DialogTitle id="form-dialog-title">{!success?"Create class":"Classroom created successfully!"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Enter the name of class and we will create a classroom for you!
+              {!success?"Enter the name of class and we will create a classroom for you!":classid + "Share this id to invite others" }
             </DialogContentText>
-            <TextField
+            {!success&&<TextField
               autoFocus
               margin="dense"
               label="Class Name"
@@ -94,15 +79,18 @@ import {
               fullWidth
               value={className}
               onChange={(e) => setClassName(e.target.value)}
-            />
+            />}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            {!success && <Button onClick={handleClose} color="primary">
               Cancel
-            </Button>
-            <Button onClick={createClass} color="primary">
+            </Button>}
+            {!success&&<Button onClick={createClass} color="primary">
               Create
-            </Button>
+            </Button>}
+            {success && <Button onClick={handleClose} color="primary">
+              Ok
+            </Button>}
           </DialogActions>
         </Dialog>
       </div>

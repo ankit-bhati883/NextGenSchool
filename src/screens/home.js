@@ -3,19 +3,16 @@ import "./home.css";
 import N from '../assets/n.png'
 import { auth, signInWithGoogle } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
-// import { useHistory } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 
 
 function Home() {
     const [user, loading, error] = useAuthState(auth);
-    // const history = useHistory();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (loading) return;
-        // if (!user) navigate(-1);
         if (user) navigate('/dashboard');
     }, [loading, user]);
   return (

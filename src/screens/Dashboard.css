@@ -3,12 +3,12 @@
     height: 100vh;
     width: 100vw;
     align-items: center;
-    justify-content: center;
+    justify-content: cen;
     font-size: 20px;
   }
   .dashboard__classContainer {
     display: flex;
-    padding: 30px;
+    justify-content: space-evenly;
+    padding-top: 30px;
     flex-wrap: wrap;
-    width: 100vw;
   }

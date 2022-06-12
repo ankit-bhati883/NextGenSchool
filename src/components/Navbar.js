@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState } from "recoil";
 import { auth, logout } from "../firebase";
-import { createDialogAtom, joinDialogAtom, signoutAtom } from "../utils/atom";
+import { createDialogAtom, joinDialogAtom, signoutAtom, createSuccessDialogAtom, joinSuccessDialogAtom } from "../utils/atom";
 import CreateClass from "./CreateClass";
 import JoinClass from "./JoinClass";
 import SignoutComp from "./SignoutComp";
@@ -12,12 +12,12 @@ import "./Navbar.css";
 import N from '../assets/n.png'
 import  TemporaryDrawer  from "./Drawer";
 function Navbar({add}) {
+  
   const [user, loading, error] = useAuthState(auth);
   const [anchorEl, setAnchorEl] = useState(null);
   const [createOpened, setCreateOpened] = useRecoilState(createDialogAtom);
   const [joinOpened, setJoinOpened] = useRecoilState(joinDialogAtom);
   const [signoutOpened, setsignoutOpened] = useRecoilState(signoutAtom);
-  // const [addvalue, setaddvalue] = useState('add');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,11 +30,11 @@ function Navbar({add}) {
       <CreateClass />
       <JoinClass />
       <SignoutComp/>
+
       <nav className="navbar">
         <div className="navbar__left">
-          <IconButton>
+          <IconButton style={{padding:4}}>
             <TemporaryDrawer/>
-            {/* <MenuIcon /> */}
           </IconButton>
           <img
             src={N}
@@ -46,6 +46,7 @@ function Navbar({add}) {
         <div className="navbar__right">
            {add==true?
           (<IconButton
+            style={{padding:4}}
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
@@ -58,7 +59,7 @@ function Navbar({add}) {
           <IconButton onClick={() => {
                 setsignoutOpened(true);
                 handleClose();
-              }}>
+              }} style={{padding:4}}>
             <Avatar src={user?.photoURL} className="userimg"/>
           </IconButton>
           <Menu

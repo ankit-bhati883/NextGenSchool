@@ -7,11 +7,15 @@
     border-bottom: 1px solid #dcdcdc;
   }
   .classCard {
+    transition: box-shadow .3s;
     width: 300px;
     border: 1px solid #dcdcdc;
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
+  }
+  .classCard:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
   }
   .classCard__middle {
     height: 190px;
@@ -35,3 +39,21 @@
     display: flex;
     flex-direction: row-reverse;
   }
+
+
+  @media(max-width:799px){
+    .classCard__middle {
+      height: 100px;
+      border-bottom: 1px solid #dcdcdc;
+    } 
+   
+  }
+  @media(max-width:499px){
+    .classCard__middle {
+      height: 80px;
+      border-bottom: 1px solid #dcdcdc;
+    } 
+  }
+
+  
+  

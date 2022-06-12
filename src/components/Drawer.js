@@ -55,9 +55,6 @@ export default function TemporaryDrawer() {
   const handlehome =()=>{
     Navigate('/dashboard')
   }
-  // const handleChange=(id)=>{
-  //   Navigate(`/class/${id}`);
-  // }
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -81,7 +78,6 @@ export default function TemporaryDrawer() {
       <div>Enrolled</div>
       <List>
         {
-          // fetchClasses()
         
         classes.map((object) => (
           <ListItem key={object.name} disablePadding onClick={() => {
@@ -94,8 +90,6 @@ export default function TemporaryDrawer() {
                 <IconButton >
                   <Avatar src={object.creatorPhoto} />
                 </IconButton>
-                {/* <img src={object.creatorPhoto}/> */}
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
               </ListItemIcon>
               <ListItemText primary={object.name} />
             </ListItemButton>
@@ -109,14 +103,13 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
+          <Button onClick={toggleDrawer(anchor, true)} style={{margin:-4}}><MenuIcon /></Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
             {list(anchor)}
-            {/* <MenuIcon /> */}
           </Drawer>
         </React.Fragment>
       ))}
