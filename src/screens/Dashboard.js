@@ -5,6 +5,7 @@ import { auth, db } from "../firebase";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import ClassCard from "../components/ClassCard";
+import Navbar from "../components/Navbar";
 import { collection, query, where, getDocs ,addDoc, updateDoc, doc,getDoc, DocumentSnapshot ,onSnapshot} from "firebase/firestore"; 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -29,9 +30,11 @@ const navigate = useNavigate();
     fetchClasses();
   }, [user, loading]);
   return (
+    <div><Navbar add={true}/> 
+    
     <div className="dashboard">
       {classes?.length === 0 ? (
-        <div className="dashboard__404">
+        <div className="dashboard__404" >
           No classes found! Join or create one!
         </div>
       ) : (
@@ -42,11 +45,12 @@ const navigate = useNavigate();
               creatorPhoto={individualClass.creatorPhoto}
               name={individualClass.name}
               id={individualClass.id}
-              style={{ marginRight: 30, marginBottom: 30 }}
+              // style={{  marginBottom: 30 }}
             />
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

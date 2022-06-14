@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: cen;
     font-size: 20px;
+    justify-content: center;
   }
   .dashboard__classContainer {
     display: flex;

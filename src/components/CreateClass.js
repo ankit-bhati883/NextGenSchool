@@ -7,6 +7,8 @@ import {
     DialogTitle,
     TextField,
   } from "@material-ui/core";
+  import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+  import { TailSpin } from  'react-loader-spinner'
   import React, { useState } from "react";
   import { useAuthState } from "react-firebase-hooks/auth";
   import { useRecoilState } from "recoil";
@@ -19,11 +21,13 @@ import {
     const [className, setClassName] = useState("");
     const [success,setSuccess]=useState(false);
     const [classid,setClassid]=useState("");
+    const [loader,setLoader]=useState(false);
     const handleClose = () => {
       setSuccess(false);
       setOpen(false);
     };
     const createClass = async () => {
+      setLoader(true);
       try {
         const newClass=await addDoc(collection(db,"classes"),{
             creatorUid: user.uid,
@@ -31,6 +35,7 @@ import {
             creatorName: user.displayName,
             creatorPhoto: user.photoURL,
             posts: [],
+            enrolledStudent:[],
           });  
         // add to current user's class list
         const q=query(collection(db,"users"),where("uid","==",user.uid))
@@ -55,23 +60,30 @@ import {
         setSuccess(true);
         setClassid(newClass.id);
         console.log('success-',success);
+        setLoader(false);
       } catch (err) {
+        setLoader(false);
         alert(`Cannot create class - ${err.message}`);
       }
     };
     return (
-      <div>
+      <div >
+        	
         <Dialog
           open={open}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
+          style={{minwidth:'400px'}}
         >
-          <DialogTitle id="form-dialog-title">{!success?"Create class":"Classroom created successfully!"}</DialogTitle>
+          {!success&&<DialogTitle id="form-dialog-title">Create class</DialogTitle>}
+          {success&&<DialogTitle id="form-dialog-title">Classroom created successfully!</DialogTitle>}
+          {/* <DialogTitle id="form-dialog-title">{!success?"Create class":"Classroom created successfully!"}</DialogTitle> */}
           <DialogContent>
-            <DialogContentText>
+            {loader&&	<TailSpin color="#00BFFF" height={100} width={100} />}
+            {!loader&&<DialogContentText>
               {!success?"Enter the name of class and we will create a classroom for you!":classid + "Share this id to invite others" }
-            </DialogContentText>
-            {!success&&<TextField
+            </DialogContentText>}
+            {!loader&&!success&&<TextField
               autoFocus
               margin="dense"
               label="Class Name"
@@ -81,7 +93,7 @@ import {
               onChange={(e) => setClassName(e.target.value)}
             />}
           </DialogContent>
-          <DialogActions>
+          {!loader&&<DialogActions>
             {!success && <Button onClick={handleClose} color="primary">
               Cancel
             </Button>}
@@ -91,7 +103,7 @@ import {
             {success && <Button onClick={handleClose} color="primary">
               Ok
             </Button>}
-          </DialogActions>
+          </DialogActions>}
         </Dialog>
       </div>
     );

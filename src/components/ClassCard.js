@@ -13,7 +13,7 @@ const navigate = useNavigate();
       <div className="classCard__upper">
         <div className="classCard__className">{name}</div>
         <div className="classCard__creatorName">{creatorName}</div>
-        <img src={creatorPhoto} className="classCard__creatorPhoto" />
+        <img src={creatorPhoto} className="classCard__creatorPhoto"  referrerpolicy="no-referrer"/>
       </div>
       <div className="classCard__middle"></div>
       <div className="classCard__lower">

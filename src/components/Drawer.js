@@ -18,6 +18,7 @@ import { auth, db } from "../firebase";
 import { collection, query, where, getDocs ,addDoc, updateDoc, doc,getDoc, DocumentSnapshot ,onSnapshot} from "firebase/firestore"; 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Avatar, IconButton } from '@material-ui/core';
+import { borderBottom } from '@mui/system';
 
 
 
@@ -75,12 +76,13 @@ export default function TemporaryDrawer() {
         ))}
       </List>
       <Divider />
-      <div>Enrolled</div>
+      <div style={{marginLeft:'10px' }}>Enrolled</div>
       <List>
         {
         
         classes.map((object) => (
-          <ListItem key={object.name} disablePadding onClick={() => {
+          <div>
+          <ListItem key={object.name} style={{borderBottom:'1px solid #dedede'}} disablePadding onClick={() => {
             console.log(object.id)
             Navigate(`/class/${object.id}`);
             console.log(object.id)
@@ -94,6 +96,8 @@ export default function TemporaryDrawer() {
               <ListItemText primary={object.name} />
             </ListItemButton>
           </ListItem>
+          {/* <Divider/> */}
+          </div>
         ))}
       </List>
     </Box>

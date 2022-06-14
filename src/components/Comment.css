@@ -6,6 +6,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 4px;
     }
     .comment__infoSection {
       display: flex;
@@ -38,6 +39,7 @@
    .comment__content {
       margin-top: 4px;
       font-weight:400;
+      word-break: break-all;
     }
     
    

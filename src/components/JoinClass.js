@@ -50,10 +50,21 @@ import {
           id: classId,
           name: classData.name,
         });
+        let tempStudent=classData.enrolledStudent;
+        console.log(tempStudent);
+        tempStudent.push({
+          id:user.uid,
+          name:user.displayName,
+          image:user.photoURL,
+        });
         const docId = userRef.docs[0].id;
         console.log("docId",docId)
         const docRef=await updateDoc( doc(db,"users",docId),{
             enrolledClassrooms: tempClassrooms,
+        })
+        const classdocId= classRef.id;
+        const classdocRef=await updateDoc(doc(db,"classes",classdocId),{
+          enrolledStudent: tempStudent,
         })
         // alert done
         setSuccess(true);

@@ -4,7 +4,7 @@ import Dashboard from "./Dashboard";
 function MainDashboard(){
     return(
       <div>
-        <Navbar add={true}/> 
+        {/* <Navbar add={true}/>  */}
         <Dashboard/>
       </div>
     )

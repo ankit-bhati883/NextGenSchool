@@ -6,6 +6,13 @@
     justify-content: space-between;
     align-items: center;
   }
+  /* .mid{
+    display: block;
+    margin-left: -10%;
+  } */
+  /* .mid_small{
+    margin-left: -10%;
+  } */
   .navbar__left {
     display: flex;
     align-items: center;
@@ -26,12 +33,109 @@
     width: auto;
   }
 
+  /* .navbar_mid{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin: 0 1rem;
+     flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+} */
+/* .navbar_mid li{
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+.navbar_mid li a{
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    transition: 0.3s ease;
+}
+.navbar_mid li a:hover,
+.navbar_mid li a.active{
+    color: #088178;
+} */
+/* .navbar_mid li a.active::after,
+.navbar_mid li a:hover::after{
+    content: "";
+    width: 30%;
+    height: 2px;
+    background: #088178;
+    position: absolute;
+    bottom: -4px;
+     left: 20px; 
+} */
+/* .navbar_small {
+  display: none;
+  height: 65px;
+  border-bottom: 1px solid #dcdcdc;
+  display: none;
+  
+} */
 
+
+
+/* @media(max-width:799px){
+  .navbar_small{
+    display: flex;
+    flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  }
+.navbar_mid_small{
+  display: flex;
+   margin: 0; 
+   padding: 0; 
+  margin: 0 1rem;
+   flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
+.navbar_mid_small li{
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+.navbar_mid_small li a{
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+.navbar_mid_small li a:hover,
+.navbar_mid_small li a.active{
+  color: #088178;
+}
+.navbar_mid_small li a.active::after,
+.navbar_mid_small li a:hover::after{
+  content: "";
+  width: 30%;
+  height: 2px;
+  background: #088178;
+  position: absolute;
+  bottom: -4px;
+   left: 20px; 
+}
+.mid{
+  display: none;
+} 
+}*/
 @media(max-width:499px){
   .MuiIconButton-root{
     padding: 4px;
  }
   .navbar {
     height: 55px;
-  }  
-}
+  }
+} 
+  /* .navbar_small {
+    height: 45px;
+  }    
+  .navbar_mid_small li a{
+    font-size: 14px;
+  } */
+

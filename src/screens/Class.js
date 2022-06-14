@@ -1,4 +1,4 @@
-import { IconButton,Button, TextField } from "@material-ui/core";
+import { IconButton,Button, TextField, Divider } from "@material-ui/core";
 import { SendOutlined } from "@material-ui/icons";
 import moment from "moment";
 import React from "react";
@@ -23,8 +23,12 @@ function Class() {
   const [user, loading, error] = useAuthState(auth);
   const [showInput, setShowInput] = useState(false);
   const [image, setImage] = useState(null);
+  const [people,setPeople]=useState(false);
+  const [students,setStudents]=useState([]);
+  const [classimg,setClassImg]=useState();
   const mypic=[L1,L2,L3,L4];
   const randomImage = mypic[Math.floor(Math.random() * mypic.length)];
+  // setClassImg(randomImage);
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -35,6 +39,12 @@ function Class() {
   const metadata = {
     contentType: 'image/jpeg'
   };
+  const handlechange=()=>{
+    setPeople(true)
+  }
+  const handleClass=()=>{
+    setPeople(false)
+  }
   const handleUpload = () => {
 
     // Upload file and metadata to the object 'images/mountains.jpg'
@@ -93,7 +103,12 @@ function Class() {
     let reversedArray = classData?.posts?.reverse();
     setPosts(reversedArray);
   }, [classData]);
-
+  useEffect(() => {
+    // reverse the array
+    let Array = classData?.enrolledStudent;
+    setStudents(Array);
+    console.log(students);
+  }, [classData]);
 
 
   const createPost = async (url) => {
@@ -145,20 +160,32 @@ function Class() {
         if (!data) navigate(-1);
         console.log(data);
         setClassData(data);
+        setClassImg(randomImage);
       });
   }, [id]);
   useEffect(() => {
     if (loading) return;
     if (!user) navigate('/');
   }, [loading, user]);
+
+  console.log(students);
   return (
+    <div>
+    <nav className="navbar_small" >
+    <div className="mid_small" > 
+    <ul className="navbar_mid_small">
+      <li onClick={handleClass}><a className={!people&& "active"}>Class</a></li>
+      <li onClick={handlechange}><a className={people&& "active"} >People</a></li>
+    </ul>
+    </div>
+    </nav>
     <div className="class">
       <div className="class__nameBox">
-        <img src={randomImage} className="nameboximage"/>
+        <img src={classimg} className="nameboximage"/>
         <div className="class__name">{classData?.name}</div>
         {classData?.creatorUid==user?.uid&&<div className="class_id">Classid- {id}</div> }
       </div>
-      <div className="class__announce">
+      {!people&&<div className="class__announce">
       {showInput ? (
                   <div className="main__form">
                     <TextField
@@ -202,13 +229,39 @@ function Class() {
 
 
         
-      </div>
-      {posts?.map((post) => (
+      </div>}
+      {!people&&posts?.map((post) => (
         <Announcement
           id={post.id}
         />
       ))}
+      { people && <div>
+        <div>
+        <h1 style={{color:'#088178'}}>Teacher</h1>
+        <Divider/>
+        <div className="main__wrapper100">
+          <div className="announcement__imageContainer">
+            <img src={classData?.creatorPhoto} alt="My image" />
+          </div>
+          <div>{classData?.creatorName}</div>
+      </div>
     </div>
+    <div>
+      <h1 style={{color:'#088178'}}>Enrolled Students</h1>
+      {students?.map((student) => (
+        <div>
+        <Divider/>
+        <div className="main__wrapper100">
+          <div className="announcement__imageContainer">
+            <img src={student?.image} alt="My image" />
+          </div>
+          <div>{student?.name}</div>
+      </div></div>
+      )
+      )}
+    </div> </div>}
+    </div></div>
   );
 }
+
 export default Class;

@@ -18,6 +18,7 @@ function Navbar({add}) {
   const [createOpened, setCreateOpened] = useRecoilState(createDialogAtom);
   const [joinOpened, setJoinOpened] = useRecoilState(joinDialogAtom);
   const [signoutOpened, setsignoutOpened] = useRecoilState(signoutAtom);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,10 +28,10 @@ function Navbar({add}) {
   console.log(add)
   return (
     <>
-      <CreateClass />
+      <CreateClass style={{minwidth:'1000px'}}/>
       <JoinClass />
       <SignoutComp/>
-
+      
       <nav className="navbar">
         <div className="navbar__left">
           <IconButton style={{padding:4}}>
@@ -43,6 +44,13 @@ function Navbar({add}) {
           />{" "}
           <span>EXTGenSchool</span>
         </div>
+        {/* {add!=true?
+        <div className="mid" > 
+        <ul className="navbar_mid">
+          <li><a>Class</a></li>
+          <li><a>People</a></li>
+        </ul>
+        </div>:null} */}
         <div className="navbar__right">
            {add==true?
           (<IconButton
@@ -60,7 +68,7 @@ function Navbar({add}) {
                 setsignoutOpened(true);
                 handleClose();
               }} style={{padding:4}}>
-            <Avatar src={user?.photoURL} className="userimg"/>
+            <Avatar src={user?.photoURL} className="userimg" />
           </IconButton>
           <Menu
             id="simple-menu"
@@ -88,6 +96,13 @@ function Navbar({add}) {
           </Menu>
         </div>
       </nav>
+      {/* {add!=true?<nav className="navbar_small" >
+        <div className="mid_small" > 
+        <ul className="navbar_mid_small">
+          <li><a>Class</a></li>
+          <li><a>People</a></li>
+        </ul>
+        </div></nav>:null} */}
     </>
   );
 }
