@@ -6,7 +6,7 @@ import 'firebase/compat/firestore';
 import { collection, query, where, getDocs ,addDoc } from "firebase/firestore"; 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB-AZlvmQsQVWVLKU9zabyihVyj_cMxLfA",
+    apiKey: "api key",
     authDomain: "nextgenschool-871e4.firebaseapp.com",
     projectId: "nextgenschool-871e4",
     storageBucket: "nextgenschool-871e4.appspot.com",
