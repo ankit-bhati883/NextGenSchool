@@ -1,3 +1,30 @@
+# NextGenSchool
+<p align="center">
+<img src="Demo/n.png" width="140" height="140">  <img
+</p>
+
+# INTRODUCTION
+
+Online School that helps teachers to interact with their students. It removes hurdles face by students during online classes. NextGenSchool is a free learning platform developed for educational institutions that aims to simplify making anouncement and distributing assignments. The primary purpose of NextGenSchool is to make process of sharing files between teachers and students easy.
+
+ # For Demo-: https://nextgenschool-871e4.web.app/
+
+ # Preview of the app-:
+<p align="center">
+<img src="Demo/demo-1.png" width="480" height="440">     <img
+src="Demo/demo-2.png" width="480" height="440">     <img
+src="Demo/demo-3.png" width="480" height="440">     <img
+src="Demo/demo-4.png" width="480" height="440">     <img
+src="Demo/demo-5.png" width="480" height="440">     <img
+<img src="Demo/demo-6.png" width="480" height="440">     <img
+src="Demo/demo-7.png" width="480" height="440">     <img
+src="Demo/demo-8.png" width="480" height="440">     <img
+src="Demo/demo-9.png" width="580" height="440">     <img
+</p>
+
+ # Build With-:
+ -> ReactJs, JavaScript, HTML, CSS, Firebase Authentication, FireStore, Material-Ui, Figma
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
